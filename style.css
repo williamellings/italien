@@ -1,155 +1,203 @@
-/* Komplett style.css - Fixad header med italiensk flagga + komplett Flexbox */
-:root {
-    --primary-color: #009246; /* Italiens flagga grön */
-    --secondary-color: #ffffff;
-    --accent-color: #ce2b37; /* Italiens flagga röd */
-    --text-color: #333;
-    --bg-color: #f8f9fa;
-}
-
+/* Grundstil för Tinas Italien-sidor */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #222;
+  line-height: 1.6;
 }
 
+/* Header med logo över nav */
 header {
-    background-image: url('Flag_of_Italy.png');
-    background-size: cover;
-    height: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* Logo vänster, nav åt andra hållet */
+  padding: 10px 20px;
 }
 
-header h1, header p {
-    position: relative;
-    z-index: 1;
-    color: var(--secondary-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+.logo-wrap {
+  flex: 0 0 auto;                   /* Bara så stor som loggan */
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+.logo {
+  width: 200px;
+  height: auto;
 }
 
+/* Nav-länkar */
+nav {
+  flex: 1;                           /* Tar resten av utrymmet */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;           /* Centrerar länkarna i nav-delen */
+  flex-wrap: wrap;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 795;
+  text-transform: uppercase;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: #1b8c3a;
+}
+
+/* MOBIL: logo ovanför nav */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;          /* Stapla: logo överst, nav under */
+    align-items: center;
+  }
+
+  .logo {
+    width: 150px;                    /* Mindre logo på mobil */
+    margin-bottom: 10px;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  nav ul {
+    justify-content: center;         /* Fortsätt centrera länkarna */
+  }
+
+  nav a {
+    font-size: 0.8rem;
+  }
+}
+nav a:hover {
+  color: #1b8c3a;
+}
+
+/* Mobil – bara ändra storlek */
+@media (max-width: 768px) {
+  .logo {
+    width: 150px;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+  }
+}
+
+/* Resten av sidan */
 main {
-    flex: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px 40px;
 }
 
-section {
-    margin-bottom: 3rem;
+/* ... (din grid/card CSS som du redan har) */
+
+.tagline {
+  font-style: italic;
+  margin-bottom: 20px;
+  color: #555;
+  text-align: center;
 }
 
-h2 {
-    color: var(--primary-color);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    border-bottom: 3px solid var(--accent-color);
-    padding-bottom: 0.5rem;
-}
-
-#facts-container {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-ul li {
-    padding: 0.75rem;
-    background: linear-gradient(135deg, #f0f8f0, #e8f5e8);
-    border-radius: 6px;
-    border-left: 4px solid var(--primary-color);
-    font-weight: 500;
-}
-
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-    align-items: stretch;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
 .card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    flex: 1 1 300px;
-    max-width: 350px;
-    text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e4d6c6;
+  padding: 16px;
+  transition: transform 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
 }
 
 .card h3 {
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-    font-size: 1.3rem;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #333;
 }
 
-footer {
-    background: var(--text-color);
-    color: var(--secondary-color);
-    text-align: center;
-    padding: 1rem;
-    margin-top: auto;
-    flex-shrink: 0;
+/* Galleri-wrapper */
+.gallery {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px 40px;
 }
 
+/* Rad med flexbox */
+.gallery-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;                 /* mellanrum mellan bilder */
+  margin-bottom: 20px;
+}
+
+/* Tre stora bilder i första raden */
+.large-row .img-large {
+  flex: 1 1 calc(33.333% - 10px);  /* 3 per rad på desktop */
+  max-width: calc(33.333% - 10px);
+}
+
+/* Sex små bilder i andra raden */
+.small-row .img-small {
+  flex: 1 1 calc(16.666% - 10px);   /* upp till 6 per rad på större skärmar */
+  max-width: calc(16.666% - 10px);
+  text-align: center;
+}
+
+.small-row .img-small img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.small-row .img-small figcaption {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Alla bilder responsiva */
+.gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Mobilanpassning */
 @media (max-width: 768px) {
-    header {
-        height: 35vh;
-    }
-    
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    .flex-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .card {
-        max-width: 100%;
-    }
-    
-    main {
-        padding: 1rem;
-    }
+  .large-row .img-large {
+    flex: 1 1 100%;          /* En stor bild per rad på mobil */
+    max-width: 100%;
+  }
+
+  .small-row .img-small {
+    flex: 1 1 45%;           /* Två små per rad på mobil */
+    max-width: 45%;
+  }
 }
+
