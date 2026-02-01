@@ -1,4 +1,4 @@
-/* Grundstil för Tinas Italien-sidor */
+/* 1. GRUNDSTIL & RESET */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,33 +12,38 @@ body {
   line-height: 1.6;
 }
 
-/* Header med logo över nav */
+main {
+  margin: 75px;
+}
+
+/* 2. HEADER & LOGOTYP */
 header {
   display: flex;
   padding: 40px 60px;
 }
 
 .logo-wrap {
-  flex: 0 0 auto;                   /* Bara så stor som loggan */
+  flex: 0 0 auto;
 }
 
 .logo {
   position: absolute;
   width: 350px;
   height: auto;
-  bottom: 850px;
+  bottom: 830px;
   left: 70px;
+  z-index: -1;
 }
 
-/* Nav-länkar */
+/* 3. NAVIGATION */
 nav {
-  flex: 1;                           /* Tar resten av utrymmet */
+  flex: 1;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  justify-content: center;           /* Centrerar länkarna i nav-delen */
+  justify-content: center;
   flex-wrap: wrap;
   gap: 40px;
   margin: 20px;
@@ -52,54 +57,11 @@ nav a {
   text-transform: uppercase;
   font-size: 1rem;
   white-space: nowrap;
+  transition: color 0.3s ease; /* Mjukare övergång vid hover */
 }
 
 nav a:hover {
   color: #1b8c3a;
-}
-
-/* MOBIL: logo ovanför nav */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;          /* Stapla: logo överst, nav under */
-    align-items: center;
-  }
-
-  .logo {
-    width: 150px;                    /* Mindre logo på mobil */
-    margin-bottom: 10px;
-  }
-
-  nav {
-    width: 100%;
-  }
-
-  nav ul {
-    justify-content: center;         /* Fortsätt centrera länkarna */
-  }
-
-  nav a {
-    font-size: 0.8rem;
-  }
-}
-nav a:hover {
-  color: #1b8c3a;
-}
-
-/* Mobil – bara ändra storlek */
-@media (max-width: 768px) {
-  .logo {
-    width: 150px;
-  }
-
-  nav a {
-    font-size: 0.8rem;
-  }
-}
-
-/* Resten av sidan */
-main {
-  margin: 100px;
 }
 
 .tagline {
@@ -109,91 +71,95 @@ main {
   text-align: center;
 }
 
+/* 4. GALLERI & GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
-.card {
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #e4d6c6;
-  padding: 16px;
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-.card h3 {
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-  color: #333;
-}
-
-/* Galleri-wrapper */
 .gallery {
-  margin: 10px;
-  padding: 0 20px 40px;
+  margin: 70px;
+  padding: 0 10px 40px;
 }
 
-/* Rad med flexbox */
 .gallery-row {
   display: flex;
-  justify-content: center;
-  gap: 10px;                 /* mellanrum mellan bilder */
+  gap: 20px;          /* Mellanrum mellan bilderna */
   margin-bottom: 20px;
+  width: 100%;        /* Tar upp hela bredden */
 }
 
-/* Tre stora bilder i första raden */
+.gallery img {
+  height: 500px;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Rad-specifika stilar */
 .large-row .img-large {
-  display: flex;
-  flex-direction: row;
-  height: 450px;
-  width: 800px;
+  flex: 1;            /* Magiskt! Gör att alla tre tar exakt lika mycket plats */
+  height: 500px;      /* Bestämmer höjden på raden */
+  overflow: hidden;   /* Ser till att inget sticker ut utanför rundade hörn */
+  border-radius: 20px;
 }
 
-/* Sex små bilder i andra raden */
+.large-row .img-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Fyller ut rutan utan att bli utsträckt */
+  display: block;
+}
+
 .small-row .img-small {
-  flex: 1 1 calc(16.666% - 10px);   /* upp till 6 per rad på större skärmar */
-  max-width: calc(16.666% - 10px);
+  flex: 1;            /* Alla sex tar lika stor plats */
   text-align: center;
 }
 
 .small-row .img-small img {
-  width: 100%;
-  height: 80%;
-  display: block;
+  width: 100%;        /* Gör bilden så bred som sin behållare */
+  height: 200px;      /* En fast höjd för de små bilderna så de blir jämna */
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 .small-row .img-small figcaption {
-  margin-top: 5px;
-  font-size: 0.8rem;
+  margin-top: 15px;
+  font-size: 0.9rem;
   font-weight: 750;
   text-transform: uppercase;
 }
 
-/* Alla bilder responsiva */
-.gallery img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-  border-radius: 4px;
-}
-
-/* Mobilanpassning */
+/* 5. MOBILANPASSNING (Allt samlat för skärmar under 768px) */
 @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    position: static; /* Går från absolut till vanlig placering på mobil */
+    width: 150px;
+    margin-bottom: 10px;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+  }
+
   .large-row .img-large {
-    flex: 1 1 100%;          /* En stor bild per rad på mobil */
+    flex: 1 1 100%;
     max-width: 100%;
+    height: auto; /* Låter bilden anpassa höjden på små skärmar */
   }
 
   .small-row .img-small {
-    flex: 1 1 45%;           /* Två små per rad på mobil */
+    flex: 1 1 45%;
     max-width: 45%;
   }
 }
-
