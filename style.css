@@ -17,9 +17,44 @@ main {
 }
 
 /* 2. HEADER & LOGOTYP */
+/* Justera headern så den fördelar innehållet */
 header {
   display: flex;
+  align-items: center;           /* Centrerar allt i höjdled */
   padding: 40px 60px;
+}
+
+/* Behållaren för knappen längst till höger */
+.header-right {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Stilen för själva knappen */
+.btn-subscribe {
+  background-color: #0ca6d4; /* Den gröna färgen */
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 50px;       /* Gör knappen rundad */
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-subscribe:hover {
+  background-color: #222;    /* Blir mörkgrå vid hover */
+  transform: translateY(-2px); /* Lyfter lite snyggt */
+}
+
+/* Mobilanpassning för knappen */
+@media (max-width: 768px) {
+  .header-right {
+    margin-top: 20px;
+    order: 3;                /* Lägger knappen längst ner på mobilen */
+  }
 }
 
 .logo-wrap {
@@ -37,7 +72,8 @@ header {
 
 /* 3. NAVIGATION */
 nav {
-  flex: 1;
+  align-items: center;
+  flex: auto;
 }
 
 nav ul {
@@ -45,7 +81,7 @@ nav ul {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 50px;
   margin: 20px;
   padding: 0;
 }
@@ -62,6 +98,25 @@ nav a {
 
 nav a:hover {
   color: #1b8c3a;
+}
+
+/* Storleken på sök-länken */
+.search-link {
+  display: flex;
+  padding: 0 20px;
+}
+
+/* Själva förstoringsglaset */
+.search-icon {
+  width: 20px;  /* Justera storleken här */
+  height: 20px;
+  transition: transform 0.2s ease, stroke 0.3s ease;
+}
+
+/* Hover-effekt (samma gröna som dina andra länkar) */
+.search-link:hover .search-icon {
+  stroke: #1b8c3a; /* Den gröna färgen från din tidigare kod */
+  transform: scale(1.1); /* Gör den lite större vid hover */
 }
 
 .tagline {
