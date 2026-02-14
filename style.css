@@ -6,122 +6,128 @@
 }
 
 body {
-  font-family: Helvetica;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: #ffffff;
   color: #222;
   line-height: 1.6;
+  padding: 0 20px; /* Ger lite luft på sidorna om hela skärmen */
 }
 
+/* 2. HEADER */
 header {
   display: flex;
-  align-items: center;           /* Centrerar dem vertikalt mot varandra */
-}
-
-.logo-container {
-  display: flex;
-  flex: 0 0 auto; /* Gör att loggan inte krymper eller växer i onödan */
+  align-items: center;
+  justify-content: space-between; /* Lägger logga till vänster och nav till höger */
+  padding: 15px 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo {
-  width: 180px;   /* Justera efter hur stor din logga faktiskt är */
+  width: 300px;
   height: auto;
+  display: block;
 }
 
 /* 3. NAVIGATION */
-nav {
-  display: flex;
-}
-
 nav ul {
   display: flex;
-  gap: 30px;                     /* Mellanrum mellan länkarna */
   list-style: none;
+  align-items: center;
 }
 
 nav a {
   text-decoration: none;
-  color: #000;
-  font-weight: 785;
+  color: #333;
+  font-weight: 700;
   text-transform: uppercase;
   font-size: 1rem;
-  transition: color 0.3s ease; /* Mjukare övergång vid hover */
+  
+  /* DE VIKTIGA DELARNA FÖR KNAPP-LOOOKEN */
+  display: inline-block;    /* Gör att padding och storlek fungerar korrekt */
+  padding: 15px 25px;       /* Skapar den "fyrkantiga" bakgrunden (höjd, bredd) */
+  transition: all 0.3s ease; /* Gör färgbytet mjukt */
+  border-radius: 4px;       /* Ta bort denna eller sätt till 0 för helt skarpa hörn */
 }
 
 nav a:hover {
-  color: #1b8c3a;
+  background-color: #222;   /* Bakgrunden blir mörk */
+  color: #fff;              /* Texten blir vit för att synas mot det mörka */
+  transform: translateY(-2px); /* Valfritt: Knappen "lyfter" lite istället för att ändra storlek */
 }
 
 
-/* 4. GALLERI & GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+/* 4. GALLERI */
+.gallery {
+  max-width: 1200px;
+  margin: 20px auto;
 }
-
 
 .gallery-row {
   display: flex;
-  gap: 20px;          /* Mellanrum mellan bilderna */
-  margin-bottom: 15px;
-  width: 100%;        /* Tar upp hela bredden */
+  gap: 20px;
+  margin-bottom: 30px;
   flex-wrap: wrap;
 }
 
-.gallery img {
-  height: 500px;
-  object-fit: cover;
-  display: block;
-  border-radius: 10px;
+/* Gemensam stil för figure */
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrerar innehållet (bilden) horisontellt */
 }
 
-/* Rad-specifika stilar */
+/* Stora bilder (3 st i rad) */
 .large-row .img-large {
-  flex: 1;            /* Magiskt! Gör att alla tre tar exakt lika mycket plats */
-  height: 500px;      /* Bestämmer höjden på raden */
-  border-radius: 20px;
+  flex: 1 1 300px; /* Flex-grow, flex-shrink, basis */
 }
 
 .large-row .img-large img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;  /* Fyller ut rutan utan att bli utsträckt */
-  display: block;
-}
-
-.small-row .img-small {
-  flex: 1;            /* Alla sex tar lika stor plats */
-  text-align: center;
-}
-
-.small-row .img-small img {
-  width: 100%;        /* Gör bilden så bred som sin behållare */
-  height: 300px;      /* En fast höjd för de små bilderna så de blir jämna */
+  width: 100%; /* Ändrat till 100% för att fylla ut, eller behåll 80% om du vill ha mellanrum */
+  height: 450px;
   object-fit: cover;
   border-radius: 15px;
 }
 
-.small-row .img-small figcaption {
-  margin-top: 15px;
-  font-size: 0.9rem;
-  font-weight: 750;
-  text-transform: uppercase;
+/* Små bilder (6 st i rad) */
+.small-row .img-small {
+  flex: 1 1 150px;
 }
 
-/* 5. MOBILANPASSNING (Allt samlat för skärmar under 768px) */
+.small-row .img-small img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.small-row .img-small figcaption {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* 5. MOBILANPASSNING */
 @media (max-width: 768px) {
   header {
-    flex-direction: column; /* Staplar logga och meny på höjden */
+    flex-direction: column;
     gap: 20px;
-    padding: 20px;
-  }
-
-  .logo {
-    width: 150px;
   }
 
   nav ul {
-    justify-content: center;
     gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    font-size: 0.75rem;
+  }
+
+  .large-row .img-large img, 
+  .small-row .img-small img {
+    height: 300px; /* Enklare för mobilen */
   }
 }
