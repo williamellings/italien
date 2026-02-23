@@ -1,4 +1,4 @@
-/* 1. GRUNDSTIL & RESET */
+/* 1. GRUNDSTIL */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,126 +8,130 @@
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: #ffffff;
-  color: #222;
-  line-height: 1.6;
-  padding: 0 20px; /* Ger lite luft på sidorna om hela skärmen */
+  padding: 0 40px;
 }
 
 /* 2. HEADER */
 header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Lägger logga till vänster och nav till höger */
-  padding: 15px 0;
-  max-width: 1200px;
+  justify-content: space-between;
+  padding: 20px 0;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .logo {
-  width: 300px;
-  height: auto;
-  display: block;
+  height: 80px; /* Justera efter din bilds höjd */
+  width: auto;
 }
 
-/* 3. NAVIGATION */
 nav ul {
   display: flex;
   list-style: none;
-  align-items: center;
+  gap: 20px;
 }
 
 nav a {
   text-decoration: none;
-  color: #333;
+  color: #000;
   font-weight: 700;
+  font-size: 0.9rem;
   text-transform: uppercase;
-  font-size: 1rem;
-  
-  /* DE VIKTIGA DELARNA FÖR KNAPP-LOOOKEN */
-  display: inline-block;    /* Gör att padding och storlek fungerar korrekt */
-  padding: 15px 25px;       /* Skapar den "fyrkantiga" bakgrunden (höjd, bredd) */
-  transition: all 0.3s ease; /* Gör färgbytet mjukt */
-  border-radius: 4px;       /* Ta bort denna eller sätt till 0 för helt skarpa hörn */
 }
 
-nav a:hover {
-  background-color: #222;   /* Bakgrunden blir mörk */
-  color: #fff;              /* Texten blir vit för att synas mot det mörka */
-  transform: translateY(-2px); /* Valfritt: Knappen "lyfter" lite istället för att ändra storlek */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
+.icon-search, .icon-menu {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 
-/* 4. GALLERI */
+.btn-subscribe {
+  background-color: #66ada3; /* Den turkosa färgen */
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* 3. GALLERI LAYOUT */
 .gallery {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 20px auto;
 }
 
-.gallery-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+.gallery-grid {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 40px;
 }
 
-/* Gemensam stil för figure */
-figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrerar innehållet (bilden) horisontellt */
+/* 3 Kolumner för stora bilder */
+.large-grid {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-/* Stora bilder (3 st i rad) */
-.large-row .img-large {
-  flex: 1 1 300px; /* Flex-grow, flex-shrink, basis */
+/* 6 Kolumner för små bilder */
+.small-grid {
+  grid-template-columns: repeat(6, 1fr);
+  padding: 0 100px; /* Ger mer luft på sidorna som i bilden */
 }
 
-.large-row .img-large img {
-  width: 100%; /* Ändrat till 100% för att fylla ut, eller behåll 80% om du vill ha mellanrum */
-  height: 450px;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-/* Små bilder (6 st i rad) */
-.small-row .img-small {
-  flex: 1 1 150px;
-}
-
-.small-row .img-small img {
+/* 4. STORA BILDER & FAVORIT-LABEL */
+.img-container {
+  position: relative; /* Krävs för att placera knappen ovanpå */
   width: 100%;
-  height: 200px;
+}
+
+.img-container img {
+  width: 100%;
+  height: 500px;
   object-fit: cover;
-  border-radius: 12px;
+  display: block;
 }
 
-.small-row .img-small figcaption {
-  margin-top: 10px;
-  font-size: 0.8rem;
+.label-favorit {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #66ada3;
+  color: white;
+  padding: 8px 15px;
+  font-size: 0.75rem;
   font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
+  border-radius: 4px;
 }
 
-/* 5. MOBILANPASSNING */
+/* 5. SMÅ BILDER */
+.small-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+figcaption {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: capitalize;
+  color: #333;
+}
+
+/* 6. MOBILANPASSNING */
+@media (max-width: 1024px) {
+  nav { display: none; } /* Gömmer stora menyn på små skärmar */
+  .small-grid { padding: 0; grid-template-columns: repeat(3, 1fr); }
+}
+
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  nav ul {
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  nav a {
-    font-size: 0.75rem;
-  }
-
-  .large-row .img-large img, 
-  .small-row .img-small img {
-    height: 300px; /* Enklare för mobilen */
-  }
+  .large-grid { grid-template-columns: 1fr; }
+  .small-grid { grid-template-columns: repeat(2, 1fr); }
 }
